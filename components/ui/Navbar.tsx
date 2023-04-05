@@ -1,9 +1,10 @@
-import { Avatar, FormElement, Input, Navbar, Text, User } from "@nextui-org/react"
+import { Button, FormElement, Input, Navbar, Text, User } from "@nextui-org/react"
 import Image from "next/image";
 import Link from "next/link";
-import { pokeApi } from "../../api";
+import { login, logout, pokeApi, useAuth } from "../../api";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { Login, Logout } from "react-iconly";
 
 interface NavbarProps{
     menu?: string,
@@ -11,6 +12,18 @@ interface NavbarProps{
 
 
 export const NavbarPokedex =({ menu }: NavbarProps)=>{
+
+    const {user, loading, error} = useAuth();
+
+
+    const handleLogin = async()=>{
+      await login();
+    }
+  
+    const handleLogout = async() =>{
+      await logout();
+    }
+
 
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -108,8 +121,13 @@ export const NavbarPokedex =({ menu }: NavbarProps)=>{
 
                 </Navbar.Item>
                 <Navbar.Item>
-                    <User bordered as="button" color="gradient" src = "https://i.pravatar.cc/150?u=a042581f4e29026704d" name="Jessica Caraguay" description="Maestro Pokémon"/>
-                                      
+                    {!user? <Button auto onClick={handleLogin} icon={<Login set="broken" primaryColor="white"/>}>Iniciar Sesión</Button>:""}
+                </Navbar.Item>
+                <Navbar.Item>
+                    {user? <User bordered as="button" color="gradient" src = {user.photoURL ?? undefined} name={user.displayName} description="Maestro Pokémon"/>:""}            
+                </Navbar.Item>
+                <Navbar.Item>
+                {user? <Button auto onClick={handleLogout} icon={<Logout set="broken" primaryColor="white"/>}/>:""}
                 </Navbar.Item>
 
             </Navbar.Content>
