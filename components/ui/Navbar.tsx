@@ -1,6 +1,9 @@
-import { Avatar, Input, Navbar, Text, useTheme } from "@nextui-org/react"
+import { Avatar, FormElement, Input, Navbar, Text, User } from "@nextui-org/react"
 import Image from "next/image";
 import Link from "next/link";
+import { pokeApi } from "../../api";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface NavbarProps{
     menu?: string,
@@ -8,6 +11,25 @@ interface NavbarProps{
 
 
 export const NavbarPokedex =({ menu }: NavbarProps)=>{
+
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const router = useRouter();
+
+    async function handleSearchChange(event: React.ChangeEvent<FormElement>) {
+        const searchTerm = event.target.value;
+        setSearchTerm(searchTerm);
+      }
+
+    async function handleSearchEnter(event: React.KeyboardEvent<HTMLInputElement>) {
+        if(event.key === "Enter"){
+            const result = await searchPokemon(searchTerm);
+            if(result){
+                router.push(`/pokemon/${result.id}`)
+            } 
+        }
+        
+    }
 
     let kanto;
     let jhoto;
@@ -40,7 +62,7 @@ export const NavbarPokedex =({ menu }: NavbarProps)=>{
     }
 
     
-    return (
+    return (    
         <Navbar isBordered variant='sticky'>
             <Navbar.Brand css={{mr:"$4"}}>
             <Link href="/">
@@ -80,16 +102,28 @@ export const NavbarPokedex =({ menu }: NavbarProps)=>{
                       },
                     }}
                     placeholder="Buscar..."
+                    onChange={handleSearchChange}
+                    onKeyDown={handleSearchEnter} 
                   />
+
                 </Navbar.Item>
                 <Navbar.Item>
-                    
-                        <Avatar bordered as="button" color="gradient" size="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d"/>
-                  
+                    <User bordered as="button" color="gradient" src = "https://i.pravatar.cc/150?u=a042581f4e29026704d" name="Jessica Caraguay" description="Maestro Pokémon"/>
+                                      
                 </Navbar.Item>
 
             </Navbar.Content>
 
         </Navbar>
     )
+}
+
+async function searchPokemon(searchTerm: string){
+    try {
+        const response = await pokeApi.get(`/pokemon/${searchTerm.toLowerCase()}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        
+    }
 }

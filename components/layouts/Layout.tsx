@@ -13,7 +13,7 @@ export const Layout = ({ children, title, menu }: LayoutProps) =>{
             <Head>
                 <title>{title || 'Pokedex'}</title>
                 <meta name="author" content="Jonathan Rosero" />
-                <meta name="description" content={`Información sobre el pokémon ${title}`}/>
+                <meta name="description" content={`Información sobre ${title}`}/>
                 <meta name="keywords" content={`${title},pokemon, pokedex`}/>
             </Head>
             <NavbarPokedex menu={menu}></NavbarPokedex>
