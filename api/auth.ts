@@ -1,11 +1,11 @@
-import { GoogleAuthProvider, signOut, signInWithRedirect } from 'firebase/auth';
+import { GoogleAuthProvider, signOut, signInWithPopup } from 'firebase/auth';
 import auth from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const googleAuth = new GoogleAuthProvider();
 
 export const login = async () => {
-  const result = await signInWithRedirect(auth, googleAuth);
+  const result = await signInWithPopup(auth, googleAuth);
 };
 
 export const logout = async () => {
