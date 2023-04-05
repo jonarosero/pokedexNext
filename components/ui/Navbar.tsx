@@ -44,10 +44,10 @@ export const NavbarPokedex =({ menu }: NavbarProps)=>{
         <Navbar isBordered variant='sticky'>
             <Navbar.Brand css={{mr:"$4"}}>
             <Link href="/">
-             <Image src={'https:raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'}
+             <Image src={"/pokeball.png"}
               alt="icono de la app"
-              width={40}
-              height={40}/></Link>
+              width={20}
+              height={20}/></Link>
               <Text b color="inherit" css={{mr:"$14"}} hideIn="xs">Pokédex</Text>
               <Navbar.Content hideIn='xs' variant="highlight-rounded" activeColor="secondary" >
                 <Navbar.Link isActive={kanto} href="/">Kanto</Navbar.Link>
