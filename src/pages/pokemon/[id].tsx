@@ -35,10 +35,10 @@ const PokemonDetail = ({ pokemon }: Props) => {
     <Layout title={pokemon.name}>
       <Spacer y={1} />
       <Grid.Container gap={2} justify="center">
-        <Grid xs={6}>
+        <Grid xs={12} md={6} justify="center">
           <CardPokemon pokemon={pokemon}></CardPokemon>
         </Grid>
-        <Grid xs={6}>
+        <Grid xs={12} md={6}>
           <DetailPokemon pokemon={pokemon}></DetailPokemon>
         </Grid>
       </Grid.Container>

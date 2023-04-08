@@ -7,7 +7,7 @@ export const CardPokemons = ({pokemon, id}: any) =>{
     const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`;
 
     return (
-      <Grid xs={4}>
+      <Grid xs={12} md={4} xl={3} justify="center">
         <Card key={pokemon.name} css={{ w: "100", h: "300px" }}>
           <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
             <Col>

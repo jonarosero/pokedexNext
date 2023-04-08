@@ -32,7 +32,7 @@ export const CardPokemon = ({pokemon}: Props) => {
 
 
   return (
-    <Card key={pokemon.id} css={{ w: "100%", h: "400px" }}>
+    <Card key={pokemon.id} css={{ w: "100%", h: "400px" }} >
       <Card.Body css={{ p: 0 }}>
         <Card.Image
           src={currentImage}
