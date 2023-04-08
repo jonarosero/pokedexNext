@@ -162,11 +162,11 @@ export const NavbarPokedex = ({ menu }: NavbarProps) => {
           )}
         </Navbar.Item>
         {user ? (
-          <Dropdown isBordered>
+          <Dropdown isBordered placement="bottom-left">
             <Navbar.Item >
-              <Dropdown.Button
-                auto
-                light
+              <Dropdown.Trigger
+                
+                
                 css={{
                   width: "200px",
                   height: "100%",
@@ -174,7 +174,7 @@ export const NavbarPokedex = ({ menu }: NavbarProps) => {
                   dflex: "center",
                   svg: { pe: "none" },
                 }}
-                ripple={false}
+
               >
                 <User
                   color="gradient"
@@ -182,7 +182,7 @@ export const NavbarPokedex = ({ menu }: NavbarProps) => {
                   name={user.displayName}
                   description="Maestro Pokémon"
                 />
-              </Dropdown.Button>
+              </Dropdown.Trigger>
             </Navbar.Item>
             <Dropdown.Menu
               aria-label="Menu personal"
@@ -209,8 +209,8 @@ export const NavbarPokedex = ({ menu }: NavbarProps) => {
                 showFullDescription
                 description="Revisa tu equipo de Pokemons"
                 icon={<Work set="broken" primaryColor="blueviolet" />}
-              >
-                Mi equipo
+              ><Link href={`/personal/${user?.displayName??undefined}`} style={{color:"white"}}>
+                Mi equipo </Link>
               </Dropdown.Item>
               <Dropdown.Item
                 key="usage_metrics"
